@@ -618,9 +618,6 @@ PHP_METHOD(PDOSqlite, createAggregate)
 	pdo_sqlite_db_handle *H;
 	int ret;
 
-//	pdo_dbh_t *dbh;
-//	pdo_sqlite_db_handle *db_handle;
-
 	dbh = Z_PDO_DBH_P(ZEND_THIS);
 	PDO_CONSTRUCT_CHECK;
 	H = (pdo_sqlite_db_handle *)dbh->driver_data;
@@ -668,8 +665,6 @@ PHP_METHOD(PDOSqlite, createCollation)
 	size_t collation_name_len;
 	pdo_dbh_t *dbh;
 	pdo_sqlite_db_handle *H;
-//	pdo_dbh_t *dbh;
-//	pdo_sqlite_db_handle *db_handle;
 	int ret;
 
 	ZEND_PARSE_PARAMETERS_START(2, 2)
@@ -696,6 +691,100 @@ PHP_METHOD(PDOSqlite, createCollation)
 	}
 
 	efree(collation);
+	RETURN_FALSE;
+}
+/* }}} */
+
+/* {{{ bool SQLite::deleteCollation(string name)
+   Deletes the named aggregate */
+PHP_METHOD(PDOSqlite, deleteAggregate)
+{
+	char *collation_name;
+	size_t collation_name_len;
+//	int ret;
+	pdo_dbh_t *dbh;
+	pdo_sqlite_db_handle *db_handle;
+
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS(), "s", &collation_name, &collation_name_len)) {
+		RETURN_THROWS();
+	}
+
+	dbh = Z_PDO_DBH_P(ZEND_THIS);
+	PDO_CONSTRUCT_CHECK;
+	db_handle = (pdo_sqlite_db_handle *)dbh->driver_data;
+
+//	ret =
+	sqlite3_create_collation(db_handle->db, collation_name, SQLITE_UTF8, NULL, NULL);
+
+//	if (ret == SQLITE_OK) {
+//		// Any useful return info?
+//		return;
+//	}
+
+	return;
+}
+/* }}} */
+
+/* {{{ bool SQLite::deleteCollation(string name)
+   Deletes the named collation */
+PHP_METHOD(PDOSqlite, deleteCollation)
+{
+	char *collation_name;
+	size_t collation_name_len;
+//	int ret;
+	pdo_dbh_t *dbh;
+	pdo_sqlite_db_handle *db_handle;
+
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS(), "s", &collation_name, &collation_name_len)) {
+		RETURN_THROWS();
+	}
+
+	dbh = Z_PDO_DBH_P(ZEND_THIS);
+	PDO_CONSTRUCT_CHECK;
+	db_handle = (pdo_sqlite_db_handle *)dbh->driver_data;
+
+//	ret =
+	sqlite3_create_collation(db_handle->db, collation_name, SQLITE_UTF8, NULL, NULL);
+
+//	if (ret == SQLITE_OK) {
+//		// Any useful return info?
+//		return;
+//	}
+
+	return;
+}
+/* }}} */
+
+
+/* {{{ bool SQLite::deleteFunction(string name)
+   Deletes the named function */
+PHP_METHOD(PDOSqlite, deleteFunction)
+{
+	char *func_name;
+	size_t func_name_len;
+	int ret;
+	pdo_dbh_t *dbh;
+	pdo_sqlite_db_handle *db_handle;
+	zend_long argc = -1;
+
+	if (FAILURE == zend_parse_parameters(ZEND_NUM_ARGS(), "s|l", &func_name, &func_name_len, &argc)) {
+		RETURN_THROWS();
+	}
+
+	dbh = Z_PDO_DBH_P(ZEND_THIS);
+	PDO_CONSTRUCT_CHECK;
+	db_handle = (pdo_sqlite_db_handle *)dbh->driver_data;
+
+	ret = sqlite3_create_function(
+		db_handle->db, func_name, argc, SQLITE_UTF8,
+		NULL, NULL, NULL, NULL
+	);
+
+	if (ret == SQLITE_OK) {
+		// Any useful return info?
+		RETURN_TRUE;
+	}
+
 	RETURN_FALSE;
 }
 /* }}} */

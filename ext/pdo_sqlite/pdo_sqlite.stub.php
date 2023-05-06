@@ -5,12 +5,7 @@
 /** @not-serializable */
 class PDOSqlite extends PDO
 {
-    public function createFunction(
-        string $function_name,
-        callable $callback,
-        int $num_args = -1,
-        int $flags = 0
-    ): bool {}
+
 
 // Whether SQLITE_OMIT_LOAD_EXTENSION is defined or not depends on how
 // SQLite was compiled: https://www.sqlite.org/compile.html
@@ -42,4 +37,17 @@ class PDOSqlite extends PDO
     // Registers a User Defined Function for use as a collating function in SQL statements
     public function createCollation(string $name, callable $callback): bool {}
 
+    public function createFunction(
+        string $function_name,
+        callable $callback,
+        int $num_args = -1,
+        int $flags = 0
+    ): bool {}
+
+
+    public function deleteAggregate(string $name): void {}
+
+    public function deleteCollation(string $name): bool {}
+
+    public function deleteFunction(string $name, int $num_args = -1): bool {}
 }

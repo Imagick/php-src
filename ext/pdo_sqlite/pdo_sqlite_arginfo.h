@@ -1,12 +1,5 @@
 /* This is a generated file, edit the .stub.php file instead.
- * Stub hash: 949c01f6e018c7abeb29f2ed699e98ed2c0553a9 */
-
-ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_PDOSqlite_createFunction, 0, 2, _IS_BOOL, 0)
-	ZEND_ARG_TYPE_INFO(0, function_name, IS_STRING, 0)
-	ZEND_ARG_TYPE_INFO(0, callback, IS_CALLABLE, 0)
-	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, num_args, IS_LONG, 0, "-1")
-	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "0")
-ZEND_END_ARG_INFO()
+ * Stub hash: b3d367fa8d5b5d8f9595a247f60fb3e1d49d7bff */
 
 #if !defined(SQLITE_OMIT_LOAD_EXTENSION)
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_PDOSqlite_loadExtension, 0, 1, _IS_BOOL, 0)
@@ -34,24 +27,50 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_PDOSqlite_createCollation,
 	ZEND_ARG_TYPE_INFO(0, callback, IS_CALLABLE, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_PDOSqlite_createFunction, 0, 2, _IS_BOOL, 0)
+	ZEND_ARG_TYPE_INFO(0, function_name, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO(0, callback, IS_CALLABLE, 0)
+	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, num_args, IS_LONG, 0, "-1")
+	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, flags, IS_LONG, 0, "0")
+ZEND_END_ARG_INFO()
 
-ZEND_METHOD(PDOSqlite, createFunction);
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_PDOSqlite_deleteAggregate, 0, 1, IS_VOID, 0)
+	ZEND_ARG_TYPE_INFO(0, name, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_PDOSqlite_deleteCollation, 0, 1, _IS_BOOL, 0)
+	ZEND_ARG_TYPE_INFO(0, name, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_class_PDOSqlite_deleteFunction, 0, 1, _IS_BOOL, 0)
+	ZEND_ARG_TYPE_INFO(0, name, IS_STRING, 0)
+	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, num_args, IS_LONG, 0, "-1")
+ZEND_END_ARG_INFO()
+
+
 #if !defined(SQLITE_OMIT_LOAD_EXTENSION)
 ZEND_METHOD(PDOSqlite, loadExtension);
 #endif
 ZEND_METHOD(PDOSqlite, openBlob);
 ZEND_METHOD(PDOSqlite, createAggregate);
 ZEND_METHOD(PDOSqlite, createCollation);
+ZEND_METHOD(PDOSqlite, createFunction);
+ZEND_METHOD(PDOSqlite, deleteAggregate);
+ZEND_METHOD(PDOSqlite, deleteCollation);
+ZEND_METHOD(PDOSqlite, deleteFunction);
 
 
 static const zend_function_entry class_PDOSqlite_methods[] = {
-	ZEND_ME(PDOSqlite, createFunction, arginfo_class_PDOSqlite_createFunction, ZEND_ACC_PUBLIC)
 #if !defined(SQLITE_OMIT_LOAD_EXTENSION)
 	ZEND_ME(PDOSqlite, loadExtension, arginfo_class_PDOSqlite_loadExtension, ZEND_ACC_PUBLIC)
 #endif
 	ZEND_ME(PDOSqlite, openBlob, arginfo_class_PDOSqlite_openBlob, ZEND_ACC_PUBLIC)
 	ZEND_ME(PDOSqlite, createAggregate, arginfo_class_PDOSqlite_createAggregate, ZEND_ACC_PUBLIC)
 	ZEND_ME(PDOSqlite, createCollation, arginfo_class_PDOSqlite_createCollation, ZEND_ACC_PUBLIC)
+	ZEND_ME(PDOSqlite, createFunction, arginfo_class_PDOSqlite_createFunction, ZEND_ACC_PUBLIC)
+	ZEND_ME(PDOSqlite, deleteAggregate, arginfo_class_PDOSqlite_deleteAggregate, ZEND_ACC_PUBLIC)
+	ZEND_ME(PDOSqlite, deleteCollation, arginfo_class_PDOSqlite_deleteCollation, ZEND_ACC_PUBLIC)
+	ZEND_ME(PDOSqlite, deleteFunction, arginfo_class_PDOSqlite_deleteFunction, ZEND_ACC_PUBLIC)
 	ZEND_FE_END
 };
 
