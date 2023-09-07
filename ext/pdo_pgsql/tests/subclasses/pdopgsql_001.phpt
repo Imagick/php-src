@@ -2,6 +2,14 @@
 PdoPgsql subclass basic
 --EXTENSIONS--
 pdo_mysql
+--SKIPIF--
+<?php
+# This does not need to be executed by the redirect as we directly test
+# the ::connect() method here already.
+if (getenv('REDIR_TEST_DIR')) {
+    die('skip Excluding from a redirected set');
+}
+?>
 --FILE--
 <?php
 
