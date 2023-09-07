@@ -1892,6 +1892,12 @@ TEST $file
 
         $junit->markTestAs('BORK', $shortname, $tested_file, 0, $ex->getMessage());
         return 'BORKED';
+    } catch (RedirectException $ex) {
+        show_result("SKIP", $ex->getMessage(), $tested_file);
+
+        $junit->markTestAs('SKIP', $shortname, $tested_file, 0, $ex->getMessage());
+
+        return 'SKIPPED';
     }
 
     $tested = $test->getName();
@@ -3296,6 +3302,10 @@ class BorkageException extends Exception
 {
 }
 
+class RedirectException extends Exception
+{
+}
+
 class JUnit
 {
     private bool $enabled = true;
@@ -3735,7 +3745,7 @@ class TestFile
     ];
 
     /**
-     * @throws BorkageException
+     * @throws BorkageException|RedirectException
      */
     public function __construct(string $fileName, bool $inRedirect)
     {
@@ -3880,7 +3890,7 @@ class TestFile
     }
 
     /**
-     * @throws BorkageException
+     * @throws BorkageException|RedirectException
      */
     private function validateAndProcess(bool $inRedirect): void
     {
@@ -3888,7 +3898,7 @@ class TestFile
         // a given test dir
         if ($this->hasSection('REDIRECTTEST')) {
             if ($inRedirect) {
-                throw new BorkageException("Can't redirect a test from within a redirected test");
+                throw new RedirectException("Can't redirect a test from within a redirected test");
             }
             return;
         }
