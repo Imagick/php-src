@@ -23,6 +23,8 @@ class PDOTest {
         $user = getenv('PDOTEST_USER');
         $pass = getenv('PDOTEST_PASS');
         $attr = getenv('PDOTEST_ATTR');
+        $useConnect = getenv('PDOTEST_USECONNECT');
+
         if (is_string($attr) && strlen($attr)) {
             $attr = unserialize($attr);
         } else {
@@ -32,7 +34,11 @@ class PDOTest {
         if ($user === false) $user = NULL;
         if ($pass === false) $pass = NULL;
 
-        $db = new $classname($dsn, $user, $pass, $attr);
+        if ($useConnect) {
+            $db = $classname::connect($dsn, $user, $pass, $attr);
+        } else {
+            $db = new $classname($dsn, $user, $pass, $attr);
+        }
 
         if (!$db) {
             die("Could not create PDO object (DSN=$dsn, user=$user)\n");
