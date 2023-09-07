@@ -8,6 +8,12 @@ $dir = getenv('REDIR_TEST_DIR');
 if (false == $dir) die('skip no driver');
 require_once $dir . 'pdo_test.inc';
 PDOTest::skip();
+
+if (getenv('PDOTEST_USECONNECT')) {
+    die('skip Test not customized for PDO::connect()');
+}
+
+echo 'nocache';
 ?>
 --FILE--
 <?php
